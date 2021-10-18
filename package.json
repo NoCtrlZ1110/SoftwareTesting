@@ -1,9 +1,9 @@
 {
-  "name": "SoftwareTesting",
+  "name": "software-testing",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --timeout 10000 test.js"
+    "test": "mocha --recursive --timeout 10000 ./main/black_box_testing.js"
   },
   "repository": "https://github.com/NoCtrlZ1110/SoftwareTesting.git",
   "author": "NoCtrlZ1110 <huynd.nguyen@gmail.com>",
