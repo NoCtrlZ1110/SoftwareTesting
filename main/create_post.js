@@ -4,10 +4,8 @@ import { Key, By, until } from 'selenium-webdriver';
 import faker from 'faker';
 
 const createPost = async (driver) => {
-  faker.locale = 'vi';
-
+  faker.locale = 'en_US';
   await driver.get(`${HOST_URL}/editor`);
-
   await sleep(1000);
 
   const forms = await driver.findElements(By.className('form-control'));
@@ -23,7 +21,6 @@ const createPost = async (driver) => {
   await bodyInput.click();
   await bodyInput.sendKeys(faker.lorem.paragraph());
 
-  faker.locale = 'en';
   await tagInput.click();
   await tagInput.sendKeys(
     faker.lorem.word(),

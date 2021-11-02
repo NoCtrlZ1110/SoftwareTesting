@@ -9,7 +9,7 @@ import commentPost from './comment.js';
 
 describe('Checkout Realworld', function () {
   let driver;
-  faker.locale = 'en';
+  faker.locale = 'en_US';
 
   let account = {
     name: faker.name.findName(),
