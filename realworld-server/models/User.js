@@ -11,7 +11,10 @@ var UserSchema = new mongoose.Schema(
       lowercase: true,
       unique: true,
       required: [true, "can't be blank"],
-      match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
+      match: [
+        /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/,
+        'is invalid',
+      ],
       index: true,
     },
     email: {

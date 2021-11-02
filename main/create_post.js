@@ -1,37 +1,44 @@
 import { sleep } from './ultis.js';
 import { HOST_URL } from './const.js';
-import { Key, By } from 'selenium-webdriver';
+import { Key, By, until } from 'selenium-webdriver';
+import faker from 'faker';
 
 const createPost = async (driver) => {
-  await sleep(2000);
+  faker.locale = 'vi';
+
   await driver.get(`${HOST_URL}/editor`);
+
+  await sleep(1000);
+
   const forms = await driver.findElements(By.className('form-control'));
   const btn = await driver.findElement(By.className('btn'));
   const [titleInput, descriptionInput, bodyInput, tagInput] = forms;
 
   await titleInput.click();
-  await titleInput.sendKeys('Đây là tiêu đề bài viết');
+  await titleInput.sendKeys(faker.lorem.sentence());
 
   await descriptionInput.click();
-  await descriptionInput.sendKeys('Đây là mô tả bài biết');
+  await descriptionInput.sendKeys(faker.lorem.sentences(2));
 
   await bodyInput.click();
-  await bodyInput.sendKeys('Đây là nội dung bài viết');
+  await bodyInput.sendKeys(faker.lorem.paragraph());
 
+  faker.locale = 'en';
   await tagInput.click();
   await tagInput.sendKeys(
-    'Đây',
+    faker.lorem.word(),
     Key.RETURN,
-    'là',
+    faker.lorem.word(),
     Key.RETURN,
-    'thẻ',
+    faker.lorem.word(),
     Key.RETURN,
-    'ví dụ',
+    faker.lorem.word(),
     Key.RETURN
   );
 
-  await sleep(500);
+  await sleep(1000);
   btn.click();
+  await driver.wait(until.elementLocated(By.className('article-page')), 10000);
 };
 
 export default createPost;

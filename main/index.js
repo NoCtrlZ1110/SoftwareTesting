@@ -1,19 +1,37 @@
-import loginTest from './login.js';
-import('chromedriver');
+import chromedriver from 'chromedriver';
 import { Builder, Key, By } from 'selenium-webdriver';
-
+import { WebDriver } from 'selenium-webdriver';
+import faker from 'faker';
+import loginTest from './login.js';
 import createPost from './create_post.js';
+import registerTest from './register.js';
+import commentPost from './comment.js';
 
 describe('Checkout Realworld', function () {
   let driver;
+  faker.locale = 'en';
+
+  let account = {
+    name: faker.name.findName(),
+    email: faker.internet.email().toLowerCase(),
+    username:
+      faker.internet.userName().toLowerCase() +
+      '_' +
+      Math.floor(Math.random() * 10).toString(),
+    password: faker.internet.password(),
+  };
 
   before(async function () {
     driver = await new Builder().forBrowser('chrome').build();
   });
 
-  it('login realworld', () => loginTest(driver));
+  it('create new account', () => registerTest(driver, account));
+
+  it('login realworld', () => loginTest(driver, account));
 
   it('create post', () => createPost(driver));
 
-  after(() => driver && driver.quit());
+  it('comment post', () => commentPost(driver));
+
+  // after(() => driver && driver.quit());
 });
