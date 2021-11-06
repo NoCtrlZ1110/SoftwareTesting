@@ -7,7 +7,7 @@ import createPost from './create_post.js';
 import registerTest from './register.js';
 import commentPost from './comment.js';
 
-describe('Checkout Realworld', function () {
+describe('Testing Realworld', function () {
   let driver;
   faker.locale = 'en_US';
 
@@ -31,7 +31,7 @@ describe('Checkout Realworld', function () {
 
   it('create post', () => createPost(driver));
 
-  it('comment post', () => commentPost(driver));
+  // it('comment post', () => commentPost(driver));
 
-  // after(() => driver && driver.quit());
+  after(() => driver && driver.quit());
 });
